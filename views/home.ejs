@@ -1,0 +1,248 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/home.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">FarmConnect</a>
+            </div>
+            <div class="navbar-container">
+                <ul class="navbar-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/About">About</a></li>
+                    <li><a href="#service">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                
+                    <% if (typeof user !== 'undefined' && user) { %>
+                        <li><a href="#">Welcome, <%= user.name %></a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    <% } else { %>
+                        <li><a href="/login">Login</a></li>
+                    <% } %>
+                    
+                </ul>
+                
+                <button class="hamburger" aria-label="Toggle menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </nav>
+    
+    
+    </header>
+
+    <div class="div1">
+        <div class="ham1">
+            <h1 class="h-1"><strong>Farm </strong><span>connect</span></h1>
+            <p>Whether you're a farmer looking for land or a landowner seeking <br> responsible farmers, FarmConnect makes it easy.</p>
+        </div>
+    </div>
+    </div>
+
+
+
+    <section id="service">
+        
+    <div class="container">
+        <div class="car">
+           <img src="/img/download.jpg" alt="" class="circular-image">
+            <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href="/Farmer"><span>Farmers</span></a>
+            </div>
+        </div>
+        <!-- <div class="car active">
+            <img src="agriculture.jpg" alt="Agricultural">
+            <p>Recanting indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <span class="icon">🌾</span>
+                <span>Agricultural</span>
+            </div>
+        </div> -->
+        <div class="car">
+            <img src="/img/download.jpg" alt="" class="circular-image">
+            <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href="/lands"><span>Lands</span></a>
+            </div>
+        </div>
+        <div class="car">
+            <img src="/img/download.jpg" alt="" class="circular-image">
+            <p>Maximum indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href="/"><span>Farm Equipment</span></a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+
+        <div class="hero-section">
+            <div class="div7">
+            <div class="content-box">
+                <h1 class="p1">Be Healthy With <br> Organic Vegetables</h1>
+                <br><br>
+                <p class="p2">Happen active county. Winding morning ambition <br> shyness evident to poor. Because elderly new.</p>
+                <br>
+                <p class="p3"><i class='bx bx-check-circle'></i> <strong>Best Quality Standards</strong></p>
+                <p class="p3"><i class='bx bx-check-circle'></i>  <strong>Natural Healthy Products</strong></p>
+                <br>
+                <button class="btn">Discover More</button>
+            </div>
+    
+       
+            <div class="image-box">
+                <!-- <img src="/img/indian-farmer-removebg-preview.png" alt="" class="farmer"> -->
+                <img src="/img/16.jpg" alt="" class="tractor">
+            </div>
+    
+           
+            <div class="stats-box">
+                <div class="stat green">
+                    <h2>250M</h2>
+                    <p>Growth Tons of Harvest</p>
+                </div>
+                <div class="stat yellow">
+                    <h2><strong>688K</strong></h2>
+                    <p><strong>Sales of our Products</strong></p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="div6">
+            <div class="div8">
+                <img src="/img/6.jpg" alt="" class="trat">
+            </div>
+
+            <div class="div7">
+                <h5 class="c1">WHY CHOOSE US</h5>
+                <h1 class="c2">We're providing high <br> quality products</h1>
+                <p class="c3">New had happen unable uneasy. Drawings can followed improved out <br> sociable not. Earnestly so do instantly pretended. See general few civilly <br> amiable pleased account carried. Excellence projecting.</p>
+
+                <div class="div9">
+                    <br><br>
+                        <div class="card">
+                            <img src="/img/download.png" alt="Farm Mechanization" class="icon">
+                            <div class="content">
+                            <h3>Farm Mechanization</h3>
+                            <p>Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
+                            </div>
+                        </div>
+                    
+                    <br><br>
+                    <div class="card">
+                        <img src="/img/images.png" alt="Farm Mechanization" class="icon">
+                        <div class="content">
+                        <h3>Farm Mechanization</h3>
+                        <p>Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+   
+    <div class="div10">
+        <h3 class="d1">OUR FARMERS</h3>
+        <h1 class="d2">Meet Our Farm Experts</h1>
+        <br>
+        <p class="d3">Everything melancholy uncommonly but solicitude inhabiting <br>projection off.Connection stimulated estimating.</p>
+        <div class="div11">
+            <div class="move">
+                <img src="/img/1-4.jpg" alt="" class="pic">
+                <br><br><br>
+                <p class="b1">Farmer of tomatoes</p>
+                <br>
+                <h6 class="b2">Aleesha Brown</h6>
+            </div>
+            <div class="move">
+                <img src="/img/2-4.jpg" alt="" class="pic">
+                <br><br><br>
+                <p class="b1">Farmer of tomatoes</p>
+                <br>
+                <h6 class="b2">Kevin Martin</h6>
+            </div>
+            <div class="move">
+                <img src="/img/3-4.jpg" alt="" class="pic">
+                <br><br><br>
+                <p class="b1">Farmer of tomatoes</p>
+                <br>
+                <h6 class="b2">Sarah Albert</h6>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact">
+        <div class="diva1">
+            <div class="border">
+                <H6 class="e1">HAVE QUESTIONS?</H6>
+                <h1 class="e2">Send Us a Message</h1>
+                <input type="text" placeholder="Name" class="input1">
+                <br><br>
+                <div class="input">
+                    <input type="text" placeholder="Email*">
+                    <input type="text" placeholder="Phone" >
+                </div>
+                <br>
+                <textarea name="" id="" placeholder="QUESTIONS?"></textarea>
+                <br>
+                <button class="btn2"><i class='bx bx-paper-plane'></i><b>GET IN TOUCH</b></button>
+            </div>
+            <div class="diva2">
+                <p class="e3">Plan upon yet way cold spot its week. Almost do am or limits <br>hearts. Resolve parties but why she shewing</p>
+                <div>
+                    <div class="card">
+                        <img src="/img/Screenshot_2025-03-11_135314-removebg-preview.png" alt="" class="icon">
+                        <div class="content">
+                        <h3>Hotline</h3>
+                        <p>+2347061370215</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/img/Screenshot_2025-03-11_135434-removebg-preview.png" alt="" class="icon">
+                        <div class="content">
+                        <h3>Our Location</h3>
+                        <p>23 Main Street, The Grand Avenue 2nd block, New Road</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="/img/Screenshot_2025-03-11_135448-removebg-preview.png" alt="" class="icon">
+                        <div class="content">
+                        <h3>Official Email</h3>
+                        <p>info@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cop1">
+        <div>
+            <p>©Copyright2025.All Right Reserved by Validthemes</p>
+        </div>
+        <div>
+            <ul>
+                <li>Terms</li>
+                <li>Privacy</li>
+                <li>Support</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/home.js"></script> 
+</body>
+</html> 
