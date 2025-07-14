@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/home.css">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -16,9 +16,10 @@
             </div>
             <div class="navbar-container">
                 <ul class="navbar-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#service">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Services</a></li>
+                    <li><a href="">Contact</a></li>
                 
                     <% if (typeof user !== 'undefined' && user) { %>
                         <li><a href="#">Welcome, <%= user.name %></a></li>
@@ -42,45 +43,47 @@
 
     <div class="div1">
         <div class="ham1">
-            <div>
-                <h1 class="h-1"><strong>Farm  </strong><span>connect</span></h1>
-            <p>Whether you're a farmer looking for land or a  landowner <br> seeking  responsible farmers, FarmConnect makes it easy.</p>
-            </div>
-            <!-- <div class="ball">
-                <img src="/img/download (1).jpg" alt="">
-            </div> -->
+            <h1 class="h-1"><strong>Farm </strong><span>connect</span></h1>
+            <p>Whether you're a farmer looking for land or a landowner seeking <br> responsible farmers, FarmConnect makes it easy.</p>
         </div>
     </div>
     </div>
 
 
 
-    <section id="service">  
-        <div class="container">
-            <div class="car">
+    <section id="service">
+        
+    <div class="container">
+        <div class="car">
+           <img src="/img/download.jpg" alt="" class="circular-image">
+            <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href=""><span>Farmers</span></a>
+            </div>
+        </div>
+        <!-- <div class="car active">
+            <img src="agriculture.jpg" alt="Agricultural">
+            <p>Recanting indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <span class="icon">🌾</span>
+                <span>Agricultural</span>
+            </div>
+        </div> -->
+        <div class="car">
             <img src="/img/download.jpg" alt="" class="circular-image">
-                <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
-            <a href="/Farmer"> <div class="footer"><span>Farmers</span></div></a>
-            </div>
-            <!-- <div class="car active">
-                <img src="agriculture.jpg" alt="Agricultural">
-                <p>Recanting indulged speaking technical maximum horrible domestic position seeing.</p>
-                <div class="footer">
-                    <span class="icon">🌾</span>
-                    <span>Agricultural</span>
-                </div>
-            </div> -->
-            <div class="car">
-                <img src="/img/download.jpg" alt="" class="circular-image">
-                <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
-                <a href="/lands"><div class="footer"><span>Post Land</span></div></a>
-            </div>
-            <div class="car">
-                <img src="/img/download.jpg" alt="" class="circular-image">
-                <p>Maximum indulged speaking technical maximum horrible domestic position seeing.</p>
-            <a href="/Available"> <div class="footer"><span>Available Lands</span></div></a>
+            <p>Continue indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href=""><span>Lands</span></a>
             </div>
         </div>
+        <div class="car">
+            <img src="/img/download.jpg" alt="" class="circular-image">
+            <p>Maximum indulged speaking technical maximum horrible domestic position seeing.</p>
+            <div class="footer">
+                <a href=""><span>Farm Equipment</span></a>
+            </div>
+        </div>
+    </div>
     </section>
 
 
@@ -133,7 +136,7 @@
                             <img src="/img/download.png" alt="Farm Mechanization" class="icon">
                             <div class="content">
                             <h3>Farm Mechanization</h3>
-                            <p>Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
+                            <p class="j1">Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
                             </div>
                         </div>
                     
@@ -142,7 +145,7 @@
                         <img src="/img/images.png" alt="Farm Mechanization" class="icon">
                         <div class="content">
                         <h3>Farm Mechanization</h3>
-                        <p>Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
+                        <p class="j1">Vegetables from FreshDirect. Our farms deliver to us daily, ensuring you only eat the best of what’s in season</p>
                         </div>
                     </div>
                 </div>
@@ -200,7 +203,7 @@
             </div>
             <div class="diva2">
                 <p class="e3">Plan upon yet way cold spot its week. Almost do am or limits <br>hearts. Resolve parties but why she shewing</p>
-                <div class="down">
+                <div>
                     <div class="card">
                         <img src="/img/Screenshot_2025-03-11_135314-removebg-preview.png" alt="" class="icon">
                         <div class="content">
@@ -240,6 +243,6 @@
         </div>
     </div>
 
-    <script src="/home.js"></script> 
+    <script src="/dashboard.js"></script> 
 </body>
 </html> 

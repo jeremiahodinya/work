@@ -7,31 +7,47 @@
     <link rel="stylesheet" href="/lands.css">
 </head>
 <body>
-    <h2>Post Your Land</h2>
-    <form action="/add" method="POST" enctype="multipart/form-data">
-        <input type="text" name="ownerName" placeholder="Owner Name" required>
-        <input type="number" name="landSize" placeholder="Land Size (acres)" required>
-        <input type="text" name="location" placeholder="Location" required>
-        <input type="number" name="price" placeholder="Price (₦)" required>
-        <input type="text" name="contact" placeholder="Contact Info (Phone/Email)" required>
-        <input type="file" name="landImage" accept="image/*" required>
-        <textarea name="description" placeholder="Description" required></textarea>
-        <button type="submit">Submit</button>
-    </form>
+  <nav class="navbar">
+    <h6>Post Land</h6>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="nav-links">
+      <a href="/home">Home</a>
+        <a href="/Farmer">Farmers</a>
+        <a href="/Available">Available</a>
+    </div>
+</nav>
+ <div class="div1">
+  <h2>Post Your Land</h2>
+  <form action="/add" method="POST" enctype="multipart/form-data">
+      <input type="text" name="ownerName" placeholder="Owner Name" required>
+      <input type="number" name="landSize" placeholder="Land Size (acres)" required>
+      <input type="text" name="location" placeholder="Location" required>
+      <input type="number" name="price" placeholder="Price (₦)" required>
+      <input type="text" name="contact" placeholder="Contact Info (Phone/Email)" required>
+      <input type="file" name="landImage" accept="image/*" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+      <a href="/Available"><button type="submit">Submit</button></a>
+  </form>
 
-    <h2>Available Lands</h2>
-    <ul>
-      <% lands.forEach(land => { %>
-        <li>
-          <img src="<%= land.imagePath %>" alt="Land Image" class="land-image">
-          <p><strong>Owner:</strong> <%= land.ownerName %></p>
-          <p><strong>Size:</strong> <%= land.landSize %> acres</p>
-          <p><strong>Location:</strong> <%= land.location %></p>
-          <p><strong>Price:</strong> ₦<%= land.price %></p>
-          <p><strong>Contact:</strong> <%= land.contact %></p>
-          <p><strong>Description:</strong> <%= land.description %></p>
-        </li>
-      <% }) %>
-    </ul>
+
+  <!-- <h2>Available Lands</h2>
+  <ul>
+    <% lands.forEach(land => { %>
+      <li>
+        <img src="<%= land.imagePath %>" alt="Land Image" class="land-image">
+        <p><strong>Owner:</strong> <%= land.ownerName %></p>
+        <p><strong>Size:</strong> <%= land.landSize %> acres</p>
+        <p><strong>Location:</strong> <%= land.location %></p>
+        <p><strong>Price:</strong> ₦<%= land.price %></p>
+        <p><strong>Contact:</strong> <%= land.contact %></p>
+        <p><strong>Description:</strong> <%= land.description %></p>
+      </li>
+    <% }) %>
+  </ul> -->
+ </div>
 </body>
 </html>

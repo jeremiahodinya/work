@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land</title>
+    <link rel="stylesheet" href="/Available.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="">  <h6>Lands</h6></a>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="nav-links">
+      <a href="/home">Home</a>
+        <a href="/Farmer">Farmers</a>
+        <a href="/lands">Post Land</a>
+    </div>
+</nav>
+  
+
+
+</header>
+  <div class="div2">
+    <!-- <h2>Available Lands</h2> -->
+    <ul>
+      <% lands.forEach(lands => { %>
+        <li>
+          <img src="<%= lands.imagePath %>" alt="Land Image" class="land-image">
+          <p><strong>Owner:</strong> <%= lands.ownerName %></p>
+          <p><strong>Size:</strong> <%= lands.landSize %> acres</p>
+          <p><strong>Location:</strong> <%= lands.location %></p>
+          <p><strong>Price:</strong> ₦<%= lands.price %></p>
+          <p><strong>Contact:</strong> <%= lands.contact %></p>
+          <p><strong>Description:</strong> <%= lands.description %></p>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+  <script src="/Available"></script>
+</body>
+</html>

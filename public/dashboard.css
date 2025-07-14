@@ -4,7 +4,7 @@
 }
 
 body{
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     align-items: center;
     min-height: 100vh;
     margin: 0;
@@ -13,6 +13,7 @@ body{
     position: fixed;
     width: 100%;
     z-index: 2222;
+    height: 70px;
     margin-top: -300px;
     align-items: center;
     background-color: #1F4E3D;
@@ -42,8 +43,8 @@ a{
 .div6{
     display: flex;
     gap: 300px;
-    margin-left: 270px;
-    margin-top: 330px;
+    margin-left: 350px;
+    margin-top: 200px;
 }
 
 .div8{
@@ -51,7 +52,7 @@ a{
 }
 .div10{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 400px;
 }
 .div11{
     margin-top: 50px;
@@ -62,13 +63,13 @@ a{
     gap: -100px;
 }
 .diva1{
-    margin-top: 180px;
+    margin-top: 300px;
     display: flex;
     justify-content: space-around;
 }
 .diva2{
     margin-right: 250px;
-    margin-top: 90px;
+    margin-top: 120px;
 }
 .circular-image {
     width: 200px; 
@@ -88,34 +89,30 @@ a{
     right: 45%;
 }
 .h-1{
-    font-size: 100px;
-}
-
-.ham1 p{
-    font-size: 30px;
+    font-size: 90px;
 }
 .d1{
     color: #49A760;
-    font-size: 30px;
+    font-size: 18px;
     margin: 0px 0px 15px;
 }
 .d2{
     color: #04000B;
-    font-size: 47px;
+    font-size: 36px;
 }
 .d3{
     color: #787878;
-    font-size: 25px;
+    font-size: 15px;
     margin: 18px 0px 0px;
     padding: 0px 80.7188px;
 }
 .c1{
-    font-size: 30px;
+    font-size: 20px;
     color: #27ae60;
     margin: 0px 0px 15px;
 }
 .c2{
-    font-size: 47px;
+    font-size: 50px;
     margin: 0px 0px 30px;
     color: #04000B;
 }
@@ -124,12 +121,15 @@ a{
     margin: 0px 0px 15px;
     color: #787878;
 }
+.j1{
+    font-size: 50px;
+}
 .b1{
-    font-size: 24px;
+    font-size: 14px;
     color: #787878;
 }
 .b2{
-    font-size: 22px;
+    font-size: 20px;
     color: #04000B;
 }
 .e1{
@@ -149,6 +149,9 @@ a{
     font-size: 20px;
     margin: 0px 0px 15px;
 }
+.card p{
+    font: 100px;
+}
 .f1{
     text-align: center;
     font-size: 45px;
@@ -157,7 +160,7 @@ a{
     width: 350px;
 }
 .move{
-    text-align: right;
+    text-align: end;
 }
 h4{
     text-align: center;
@@ -193,7 +196,7 @@ span{
     justify-content: space-between;
     padding: 50px;
     position: relative;
-    margin-top: 150px;
+    margin-top: 100px;
 }
 
 /* Left Box */
@@ -222,6 +225,7 @@ h1 {
 .input1{
     width: 570px;
     margin: 0px 0px 15px;
+    padding: 15px 20px;
     padding: 15px 20px;
     margin: 0px 0px 15px;
     background: #F8F8F8;
@@ -345,7 +349,7 @@ strong{
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    margin-top: 200px;
+    margin-top: 400px;
 }
 .car {
     background: white;
@@ -353,8 +357,7 @@ strong{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     overflow: hidden;
     text-align: center;
-    width: 350px;
-    height: 360px;
+    width: 250px;
     padding: 20px;
     transition: 0.3s;
 }
@@ -365,10 +368,11 @@ strong{
     object-fit: cover;
 } */
 .car p {
-    font-size: 18px;
+    font-size: 14px;
     color: #666;
     margin: 10px 0;
 }
+
 .footer {
     background: #2d6a4f;
     color: white;
@@ -379,7 +383,6 @@ strong{
     padding: 10px;
     border-radius: 5px;
     gap: 5px;
-    margin-top: 70  px;
 }
 .footer .icon {
     font-size: 18px;
@@ -393,19 +396,10 @@ strong{
     align-items: center;
     background: white;
     padding: 10px;
+    font-size: 20px;
     border-radius: 8px;
     max-width: 500px;
   }
-
-  .card h3{
-    font: 15px;
-  }
-
-
-  .down{
-    margin-top: 50px;
-  }
- 
   
   .icon {
     width: 90px;
@@ -415,14 +409,14 @@ strong{
   
   .content h3 {
     margin: 0;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
     color: black;
   }
   
   .content p {
     margin: 5px 0 0;
-    font-size: 16px;
+    font-size: 14px;
     color: gray;
   }
   
@@ -438,7 +432,7 @@ strong{
     position: fixed;
     width: 100%;
     z-index: 2222;
-    height: 100px;
+    height: 70px;
     margin-top: -300px;
     align-items: center;
     background-color: #1F4E3D;
@@ -453,23 +447,21 @@ strong{
     text-decoration: none;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;  
-    font-weight: bold;
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .navbar-links li a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: 0.3s;
+    transition: color 0.3s ease;
 }
 
 .navbar-links li a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    color: #d4ffd4; /* Light green hover effect */
 }
 
 /* Hamburger Menu */
@@ -492,7 +484,7 @@ strong{
 /* Responsive Styles */
 @media (max-width:900px) {
     .container {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
     .navbar-links {
@@ -542,12 +534,6 @@ strong{
     .p2{
         font-size: 0.9rem;
     }
-    .d3{
-        font-size: 1.4rem;
-    }
-    .b1{
-        font-size: 1.3rem;
-    }
     .move{
         text-align: center;
         margin-right: 0.6rem;
@@ -589,10 +575,6 @@ strong{
     }
     .div10{
         margin-top: 14rem;
-        left: 12rem;
-    }
-    .div11{
-        right: 5rem;
     }
     .div6{
         flex-direction: column;
@@ -601,8 +583,6 @@ strong{
     }
     .div7{
         margin-top: -10rem;
-        left: 2rem;
-        right: 10rem;
     }
     .content-box{
         flex-direction: column;

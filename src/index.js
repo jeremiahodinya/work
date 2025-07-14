@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const User = require("../models/User");
 const Land = require("../models/Land");
 
+const bcrypt = require("bcryptjs");
 
 
 
@@ -52,7 +53,7 @@ app.use(express.static("public"));
 app.use(express.static("src"));
 // MongoDB Connection
 mongoose
-  .connect('mongodb+srv://jeremiahodinniya502:JSpnYVMsGFhKhzgf@cluster0.95wdh.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect('mongodb+srv://jeremiahodinniya502:FDdI8bJXc6vnANXD@cluster0.95wdh.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -60,10 +61,13 @@ mongoose
 app.get("/signup", (req, res) => res.render("signup"));
 app.get("/login", (req, res) => res.render("login"));
 app.get("/Farmer", (req, res) => res.render("Farmer"));
-app.get("/lands", async (req, res) => {
+
+// app.get("/Available", (req, res) => res.render("Available"));
+app.get("/dashboard", (req, res) => res.render("dashboard"));
+app.get("/Available", async (req, res) => {
   try {
     const lands = await Land.find(); // Fetch lands from DB
-    res.render("lands", { lands }); // Pass lands data to the EJS template
+    res.render("Available", { lands }); // Pass lands data to the EJS template
   } catch (error) {
     console.error("Error fetching lands:", error);
     res.status(500).send("Error loading lands");
@@ -81,14 +85,10 @@ app.get("/", (req, res) => {
 
 app.post("/signup", async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body; // Removed role
 
-    if (!name || !email || !password || !role) {
+    if (!name || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
-    }
-
-    if (!["farmer", "landowner"].includes(role)) {
-      return res.status(400).json({ error: "Invalid role selected." });
     }
 
     // Check if user exists
@@ -98,7 +98,7 @@ app.post("/signup", async (req, res) => {
     }
 
     // Save user with plain text password (NOT SECURE)
-    const newUser = new User({ name, email, password, role });
+    const newUser = new User({ name, email, password });
     await newUser.save();
 
     res.redirect("/login");
@@ -107,10 +107,14 @@ app.post("/signup", async (req, res) => {
     res.status(500).json({ error: "Error registering user" });
   }
 });
+
+
+
+
 // GET: Show land posting form
-app.get("/land", async (req, res) => {
+app.get("/lands", async (req, res) => {
   const lands = await Land.find();
-  res.render("index", { lands });
+  res.render("lands", { lands });
 });
 
 
@@ -177,10 +181,10 @@ app.get("/logout", (req, res) => {
     if (err) {
       return res.status(500).json({ error: "Error logging out" });
     }
-    res.redirect("/login");
+    res.redirect("/dashboard");
   });
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,3 +1,8 @@
+function toggleMenu() {
+    const navLinks = document.querySelector(".nav-links");
+    navLinks.classList.toggle("active");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.querySelectorAll(".learnMoreBtn");
 
@@ -15,3 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+

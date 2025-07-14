@@ -38,10 +38,17 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
   }
   
+  a{
+    text-decoration: none;
+    color: #000;
+  }
+
   .form-input:focus {
-    border-color: #007bff;
+    border-color: #000;
     outline: none;
   }
   
@@ -49,16 +56,18 @@ body {
   .form-button {
     width: 100%;
     padding: 14px;
-    background-color: #007bff;
+    background-color: #1F4E3D;
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    font-weight: bold;
+    cursor: pointer;
   }
   
   .form-button:hover {
-    background-color: #0056b3;
+    background-color: #000;
   }
   
   /* Responsive design for smaller screens */
