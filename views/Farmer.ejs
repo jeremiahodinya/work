@@ -4,191 +4,323 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmers Profile</title>
-    <link rel="stylesheet" href="/farmer.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .card:hover .details {
+            max-height: 500px;
+            opacity: 1;
+            padding: 1rem;
+        }
+        
+        .details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .post-modal {
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .post-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .menu-toggle {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-toggle.active div:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .nav-links {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .nav-links.active {
+            max-height: 500px;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <h6>Farmers</h6>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-tractor text-2xl"></i>
+                <h1 class="text-2xl font-bold">FarmConnect</h1>
+            </div>
+            
+            <div class="md:hidden">
+                <div class="menu-toggle cursor-pointer space-y-2" onclick="toggleMenu()">
+                    <div class="w-8 h-1 bg-white"></div>
+                    <div class="w-8 h-1 bg-white"></div>
+                    <div class="w-8 h-1 bg-white"></div>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex space-x-6">
+                <a href="/home" class="hover:text-green-200">Home</a>
+                <a href="/Farmer" class="hover:text-green-200">Farmers</a>
+                <a href="#" class="hover:text-green-200">Services</a>
+                <a href="#" class="hover:text-green-200">Contact</a>
+                <button onclick="openPostModal()" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition">
+                    <i class="fas fa-plus mr-2"></i> Post Profile
+                </button>
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="/home">Home</a>
-            <!-- <a href="/lands">Lands</a>
-            <a href="services">Services</a>
-            <a href="contact">Contact</a> -->
+        
+        <div class="nav-links container mx-auto md:hidden">
+            <div class="flex flex-col space-y-3 p-4">
+                <a href="#" class="hover:text-green-200">Home</a>
+                <a href="#" class="hover:text-green-200">Farmers</a>
+                <a href="#" class="hover:text-green-200">Services</a>
+                <a href="#" class="hover:text-green-200">Contact</a>
+                <button onclick="openPostModal()" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition">
+                    <i class="fas fa-plus mr-2"></i> Post Profile
+                </button>
+            </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
+    
+    <!-- Post Modal -->
+    <div class="post-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-green-700">Create Farmer Profile</h2>
+                <button onclick="closePostModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-                <p><strong>experience:</strong> New York, USA</p>
-            </div>
+            
+            <form id="farmerForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">Profile Image</label>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                            <img id="previewImage" src="" alt="" class="hidden w-full h-full object-cover">
+                            <i class="fas fa-user text-gray-400 text-2xl" id="defaultIcon"></i>
+                        </div>
+                        <input type="file" id="profileImage" accept="image/*" class="hidden" onchange="previewFile()">
+                        <button type="button" onclick="document.getElementById('profileImage').click()" class="bg-green-100 text-green-700 px-3 py-1 rounded hover:bg-green-200">
+                            Upload
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div>
+                    <label for="type" class="block text-gray-700 mb-2">Farmer Type</label>
+                    <select id="type" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="Urban Farmer">Urban Farmer</option>
+                        <option value="Organic Farmer">Organic Farmer</option>
+                        <option value="Dairy Farmer">Dairy Farmer</option>
+                        <option value="Poultry Farmer">Poultry Farmer</option>
+                        <option value="Crop Farmer">Crop Farmer</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div>
+                    <label for="phone" class="block text-gray-700 mb-2">Phone</label>
+                    <input type="tel" id="phone" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div>
+                    <label for="location" class="block text-gray-700 mb-2">Location</label>
+                    <input type="text" id="location" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div>
+                    <label for="experience" class="block text-gray-700 mb-2">Experience (years)</label>
+                    <input type="number" id="experience" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div>
+                    <label for="bio" class="block text-gray-700 mb-2">Bio</label>
+                    <textarea id="bio" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closePostModal()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                        Post Profile
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container mx-auto py-8 px-4">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-green-800">Meet Our Farmers</h2>
+            <button onclick="openPostModal()" class="md:hidden bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+                <i class="fas fa-plus mr-2"></i> Post
+            </button>
         </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="farmersContainer">
+            <!-- Farmer cards will be added here dynamically -->
         </div>
-    </div>    
-    <div class="container">
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-                <p><strong>experience:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-    </div>  
-    <div class="container">
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-                <p><strong>experience:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-    </div>  
-    <div class="container">
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-                <p><strong>experience:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-        <div class="car">
-            <img src="/public/img/download.jpg" alt="">
-            <h2>John Doe</h2>
-            <p>Urban Farmer</p>
-            <div class="footer">
-                <a class="learnMoreBtn"><span>Learn More</span></a>
-            </div>
-            <div class="details">
-                <p><strong>Email:</strong> john@example.com</p>
-                <p><strong>Phone:</strong> +123 456 7890</p>
-                <p><strong>Location:</strong> New York, USA</p>
-            </div>
-        </div>
-    </div>  
-    <script src="/farmer.js"></script>
+    </div>
+    
+    <script>
+        // DOM elements
+        const farmersContainer = document.getElementById('farmersContainer');
+        const farmerForm = document.getElementById('farmerForm');
+        const postModal = document.querySelector('.post-modal');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        // Array to store farmers
+        let farmers = [];
+        
+        // Load farmers from localStorage if available
+        function loadFarmers() {
+            const savedFarmers = localStorage.getItem('farmers');
+            if (savedFarmers) {
+                farmers = JSON.parse(savedFarmers);
+                farmers.forEach(farmer => createFarmerCard(farmer));
+            }
+        }
+        
+        // Create a farmer card
+        function createFarmerCard(farmer) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 card';
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${farmer.image}" alt="${farmer.name}" class="w-full h-48 object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <h3 class="text-xl font-bold text-white">${farmer.name}</h3>
+                        <p class="text-green-300">${farmer.type}</p>
+                    </div>
+                </div>
+                
+                <div class="p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600"><i class="fas fa-map-marker-alt mr-2 text-green-600"></i> ${farmer.location}</span>
+                        <span class="text-gray-600"><i class="fas fa-clock mr-2 text-green-600"></i> ${farmer.experience}</span>
+                    </div>
+                    
+                    <p class="text-gray-700 mb-4">${farmer.bio}</p>
+                    
+                    <div class="details">
+                        <div class="border-t pt-3 space-y-2">
+                            <p><i class="fas fa-envelope mr-2 text-green-600"></i> <strong>Email:</strong> ${farmer.email}</p>
+                            <p><i class="fas fa-phone mr-2 text-green-600"></i> <strong>Phone:</strong> ${farmer.phone}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="footer mt-4">
+                        <button class="learnMoreBtn w-full bg-green-100 text-green-700 py-2 rounded-lg hover:bg-green-200 transition">
+                            Contact Farmer
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            farmersContainer.appendChild(card);
+        }
+        
+        // Form submission
+        farmerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newFarmer = {
+                name: document.getElementById('name').value,
+                type: document.getElementById('type').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                location: document.getElementById('location').value,
+                experience: document.getElementById('experience').value + ' years',
+                bio: document.getElementById('bio').value || 'No bio provided yet.',
+                image: document.getElementById('previewImage').src || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80'
+            };
+            
+            farmers.push(newFarmer);
+            localStorage.setItem('farmers', JSON.stringify(farmers));
+            createFarmerCard(newFarmer);
+            closePostModal();
+            farmerForm.reset();
+            document.getElementById('previewImage').src = '';
+            document.getElementById('previewImage').classList.add('hidden');
+            document.getElementById('defaultIcon').classList.remove('hidden');
+        });
+        
+        // Preview uploaded image
+        function previewFile() {
+            const preview = document.getElementById('previewImage');
+            const file = document.getElementById('profileImage').files[0];
+            const reader = new FileReader();
+            
+            reader.onloadend = function() {
+                preview.src = reader.result;
+                preview.classList.remove('hidden');
+                document.getElementById('defaultIcon').classList.add('hidden');
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Modal controls
+        function openPostModal() {
+            postModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePostModal() {
+            postModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Mobile menu toggle
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+        
+        // Close modal when clicking outside
+        postModal.addEventListener('click', function(e) {
+            if (e.target === postModal) {
+                closePostModal();
+            }
+        });
+        
+        // Initialize the page
+        window.onload = function() {
+            loadFarmers();
+        };
+    </script>
 </body>
 </html>

@@ -53,7 +53,7 @@ app.use(express.static("public"));
 app.use(express.static("src"));
 // MongoDB Connection
 mongoose
-  .connect('mongodb+srv://jeremiahodinniya502:FDdI8bJXc6vnANXD@cluster0.95wdh.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect('mongodb+srv://jeremiahodinniya502:YHH0HLnn2cnULCsp@cluster0.95wdh.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 

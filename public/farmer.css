@@ -57,7 +57,7 @@ h6{
 
 /* Footer button */
 .footer {
-    background: #2d6a4f;
+    background: #16A34A;
     color: white;
     font-weight: bold;
     display: flex;
@@ -71,7 +71,7 @@ h6{
 }
 
 .footer:hover {
-    background: #1b4332;
+    background: #16A34A;
 }
 
 /* Icon inside footer */
@@ -85,7 +85,7 @@ h6{
     width: 100%;
     z-index: 2222;
     height: 70px;
-    background-color: #1F4E3D;
+    background-color: #16A34A;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -148,7 +148,7 @@ h6{
         top: 60px;
         left: 0;
         width: 100%;
-        background-color: #1F4E3D;
+        background-color: #16A34A;
         text-align: center;
         padding: 10px 0;
     }

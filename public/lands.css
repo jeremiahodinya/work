@@ -12,7 +12,7 @@ body {
     width: 97%;
     z-index: 2222;
     height: 60px;
-    background-color: #1F4E3D;
+    background-color: #16A34A;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -93,7 +93,7 @@ textarea {
 }
 
 button {
-    background: #2d6a4f;
+    background: #16A34A;
     color: white;
     border: none;
     font-size: 18px;
@@ -102,7 +102,7 @@ button {
 }
 
 button:hover {
-    background: #1b4332;
+    background: #16A34A;
 }
 
 /* Lands List */
@@ -148,7 +148,7 @@ li img {
         top: 60px;
         left: 0;
         width: 100%;
-        background-color: #1F4E3D;
+        background-color: #16A34A
         text-align: center;
         padding: 10px 0;
     }

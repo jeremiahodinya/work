@@ -39,7 +39,7 @@ h3 {
 .signup-box {
   width: 30%;
   height: 40%;
-  background-color: #1F4E3D;
+   background: linear-gradient(135deg, #15803D 0%, #319795 100%);
   color: white;
   padding: 40px;
   text-align: center;
@@ -68,7 +68,7 @@ h3 {
 .form-button {
   width: 100%;
   padding: 14px;    
-  background-color: #1F4E3D;
+ background: linear-gradient(135deg, #15803D 0%, #319795 100%);
   color: white;
   border: none;
   border-radius: 4px;

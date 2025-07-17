@@ -3,51 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Land</title>
-    <link rel="stylesheet" href="/lands.css">
+    <title>AgroLand - Post Your Land</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #15803D 0%, #319795 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+        
+        .input-focus:focus {
+            border-color: #15803D;
+            box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.2);
+        }
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e0;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-label:hover {
+           
+            background-color: #f0fdfa;
+        }
+        
+        .file-upload-icon {
+            margin-right: 0.5rem;
+            color: #15803D;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg,#15803D 0%, #319795 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body>
-  <nav class="navbar">
-    <h6>Post Land</h6>
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div class="nav-links">
-      <a href="/home">Home</a>
-        <a href="/Farmer">Farmers</a>
-        <a href="/Available">Available</a>
-    </div>
-</nav>
- <div class="div1">
-  <h2>Post Your Land</h2>
-  <form action="/add" method="POST" enctype="multipart/form-data">
-      <input type="text" name="ownerName" placeholder="Owner Name" required>
-      <input type="number" name="landSize" placeholder="Land Size (acres)" required>
-      <input type="text" name="location" placeholder="Location" required>
-      <input type="number" name="price" placeholder="Price (₦)" required>
-      <input type="text" name="contact" placeholder="Contact Info (Phone/Email)" required>
-      <input type="file" name="landImage" accept="image/*" required>
-      <textarea name="description" placeholder="Description" required></textarea>
-      <a href="/Available"><button type="submit">Submit</button></a>
-  </form>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-leaf text-teal-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">AgroLand</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/home" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-teal-600 transition">Home</a>
+                        <a href="/Farmer" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-teal-600 transition">Farmers</a>
+                        <a href="/Available" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-teal-600 transition">Available Lands</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium bg-teal-50 text-teal-600 hover:bg-teal-100 transition">Post Land</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-teal-600 hover:bg-gray-100 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+                
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-100">Home</a>
+                <a href="/Farmer" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-100">Farmers</a>
+                <a href="/Available" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-100">Available Lands</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium bg-teal-50 text-teal-600">Post Land</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4">List Your Land with AgroLand</h1>
+                <p class="text-xl max-w-3xl mx-auto">Connect with farmers looking for land to cultivate and earn from your unused agricultural land.</p>
+            </div>
+        </div>
+    </div>
 
-  <!-- <h2>Available Lands</h2>
-  <ul>
-    <% lands.forEach(land => { %>
-      <li>
-        <img src="<%= land.imagePath %>" alt="Land Image" class="land-image">
-        <p><strong>Owner:</strong> <%= land.ownerName %></p>
-        <p><strong>Size:</strong> <%= land.landSize %> acres</p>
-        <p><strong>Location:</strong> <%= land.location %></p>
-        <p><strong>Price:</strong> ₦<%= land.price %></p>
-        <p><strong>Contact:</strong> <%= land.contact %></p>
-        <p><strong>Description:</strong> <%= land.description %></p>
-      </li>
-    <% }) %>
-  </ul> -->
- </div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 -mt-10">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="md:flex">
+                <div class="md:w-1/3 bg-teal-50 p-8 flex flex-col justify-center">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-tractor text-5xl text-teal-500 mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-800">Land Listing Form</h2>
+                        <p class="text-gray-600 mt-2">Fill out this form to list your available agricultural land</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-500 mr-4">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-800">Quick Process</h3>
+                                <p class="text-gray-600">Complete this simple form in just 2 minutes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-500 mr-4">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-800">Secure Platform</h3>
+                                <p class="text-gray-600">Your information is protected and secure</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-500 mr-4">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-800">Verified Farmers</h3>
+                                <p class="text-gray-600">Connect with pre-screened, reliable farmers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 p-8">
+                    <form action="/add" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="ownerName" class="block text-sm font-medium text-gray-700 mb-1">Owner Name *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <input type="text" id="ownerName" name="ownerName" required
+                                        class="input-focus pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                        placeholder="John Doe">
+                                </div>
+                            </div>
+                                            
+                            <div>
+                                <label for="landSize" class="block text-sm font-medium text-gray-700 mb-1">Land Size (acres) *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                        <i class="fas fa-ruler-combined"></i>
+                                    </div>
+                                    <input type="number" id="landSize" name="landSize" required
+                                        class="input-focus pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                        placeholder="5">
+                                </div>
+                            </div>
+                                            
+                            <div>
+                                <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <input type="text" id="location" name="location" required
+                                        class="input-focus pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                        placeholder="City, State">
+                                </div>
+                            </div>
+                                            
+                            <div>
+                                <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price (₦) *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <input type="number" id="price" name="price" required
+                                        class="input-focus pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                        placeholder="50000">
+                                </div>
+                            </div>
+                                            
+                            <div>
+                                <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">Contact Info *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <input type="text" id="contact" name="contact" required
+                                        class="input-focus pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                        placeholder="Phone or Email">
+                                </div>
+                            </div>
+                                            
+                            <div>
+                                <label for="landImage" class="block text-sm font-medium text-gray-700 mb-1">Land Image *</label>
+                                <div class="file-upload">
+                                    <input type="file" id="landImage" name="landImage" accept="image/*" required class="file-upload-input">
+                                    <label for="landImage" class="file-upload-label">
+                                        <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                        <span>Click to upload land photo</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                                        
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
+                            <textarea id="description" name="description" rows="4" required
+                                class="input-focus block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 py-2 px-4 border"
+                                placeholder="Describe the land features, soil type, water availability, etc."></textarea>
+                        </div>
+                                        
+                        <div class="flex justify-end">
+                            <button type="submit" class="submit-btn inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                                Submit Land Listing
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+                
+        <!-- Features Section -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Why Choose AgroLand?</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">We provide the best platform to connect landowners with qualified farmers</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600 mb-4">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Extensive Farmer Network</h3>
+                    <p class="text-gray-600">Access our database of thousands of verified farmers actively seeking land.</p>
+                </div>
+                                
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                        <i class="fas fa-file-contract text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Legal Support</h3>
+                    <p class="text-gray-600">We provide standardized lease agreements to protect both parties.</p>
+                </div>
+                                
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600 mb-4">
+                        <i class="fas fa-headset text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Dedicated Support</h3>
+                    <p class="text-gray-600">Our team is available to assist you throughout the leasing process.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonials -->
+        <div class="mt-16 bg-teal-50 rounded-xl p-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">What Our Landowners Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 mr-4">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Adebayo Johnson</h4>
+                            <p class="text-sm text-gray-600">Lagos, Nigeria</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"AgroLand helped me find a responsible farmer for my 5-acre plot within just 2 weeks. The process was smooth and the platform is very user-friendly."</p>
+                    <div class="flex mt-3 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 mr-4">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Chioma Okeke</h4>
+                            <p class="text-sm text-gray-600">Enugu, Nigeria</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"I was skeptical at first, but AgroLand exceeded my expectations. They connected me with a professional farmer who takes excellent care of my land."</p>
+                    <div class="flex mt-3 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+        
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-leaf text-teal-400 mr-2"></i>
+                        <span>AgroLand</span>
+                    </h3>
+                    <p class="text-gray-400">Bridging the gap between landowners and farmers for sustainable agricultural development.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-teal-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-teal-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-teal-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-teal-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/home" class="text-gray-400 hover:text-teal-400 transition">Home</a></li>
+                        <li><a href="/Farmer" class="text-gray-400 hover:text-teal-400 transition">Farmers</a></li>
+                        <li><a href="/Available" class="text-gray-400 hover:text-teal-400 transition">Available Lands</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-teal-400 transition">Post Land</a></li>
+                    </ul>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-teal-400 transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-teal-400 transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-teal-400 transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-teal-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Stay Updated</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates on agricultural opportunities.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-md w-full text-gray-800 focus:outline-none">
+                        <button class="bg-teal-600 hover:bg-teal-500 px-4 py-2 rounded-r-md transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+                        
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 AgroLand. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-teal-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-teal-400 text-sm transition">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
