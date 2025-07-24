@@ -94,9 +94,8 @@
             
             <div class="hidden md:flex space-x-6">
                 <a href="/home" class="hover:text-green-200">Home</a>
-                <a href="/Farmer" class="hover:text-green-200">Farmers</a>
-                <a href="#" class="hover:text-green-200">Services</a>
-                <a href="#" class="hover:text-green-200">Contact</a>
+                <a href="/Available" class="hover:text-green-200">Available Lands</a>
+                <a href="/lands" class="hover:text-green-200">Post Land</a>
                 <button onclick="openPostModal()" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition">
                     <i class="fas fa-plus mr-2"></i> Post Profile
                 </button>
@@ -105,10 +104,9 @@
         
         <div class="nav-links container mx-auto md:hidden">
             <div class="flex flex-col space-y-3 p-4">
-                <a href="#" class="hover:text-green-200">Home</a>
-                <a href="#" class="hover:text-green-200">Farmers</a>
-                <a href="#" class="hover:text-green-200">Services</a>
-                <a href="#" class="hover:text-green-200">Contact</a>
+                <a href="/home" class="hover:text-green-200">Home</a>
+                <a href="/Available" class="hover:text-green-200">Available Lands</a>
+                v<a href="/lands" class="hover:text-green-200">Post Land</a>
                 <button onclick="openPostModal()" class="bg-white text-green-700 px-4 py-2 rounded-full hover:bg-green-100 transition">
                     <i class="fas fa-plus mr-2"></i> Post Profile
                 </button>
@@ -117,66 +115,69 @@
     </nav>
     
     <!-- Post Modal -->
-    <div class="post-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-green-700">Create Farmer Profile</h2>
-                <button onclick="closePostModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-         <form id="farmerForm" class="space-y-2 text-sm">
-    <div class="grid grid-cols-2 gap-2 items-center">
-        <label class="col-span-2 text-gray-700">Profile Image</label>
-        <div class="flex items-center space-x-2 col-span-2">
-            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                <img id="previewImage" src="" alt="" class="hidden w-full h-full object-cover">
-                <i class="fas fa-user text-gray-400 text-base" id="defaultIcon"></i>
-            </div>
-            <input type="file" id="profileImage" accept="image/*" class="hidden" onchange="previewFile()">
-            <button type="button" onclick="document.getElementById('profileImage').click()" class="bg-green-100 text-green-700 px-2 py-1 rounded hover:bg-green-200 text-xs">
-                Upload
-            </button>
-        </div>
-
-        <label for="name">Full Name</label>
-        <input type="text" id="name" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-
-        <label for="type">Farmer Type</label>
-        <select id="type" class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-            <option>Urban Farmer</option>
-            <option>Organic Farmer</option>
-            <option>Dairy Farmer</option>
-            <option>Poultry Farmer</option>
-            <option>Crop Farmer</option>
-        </select>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-
-        <label for="location">Location</label>
-        <input type="text" id="location" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-
-        <label for="experience">Experience (yrs)</label>
-        <input type="number" id="experience" class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
-
-        <label for="bio" class="col-span-2">Bio</label>
-        <textarea id="bio" rows="2" class="w-full px-2 py-1 border rounded focus:ring-green-500 text-sm col-span-2"></textarea>
+   <div class="post-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold text-green-700">Create Farmer Profile</h2>
+      <button onclick="closePostModal()" class="text-gray-500 hover:text-gray-700">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
 
-    <div class="flex justify-end space-x-2 pt-2">
-        <button type="button" onclick="closePostModal()" class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-100">
-            Cancel
-        </button>
-        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
-            Post
-        </button>
+    <!-- Add enctype and method -->
+<form action="/api/farmers" method="POST" enctype="multipart/form-data">
+  <div class="grid grid-cols-2 gap-2 items-center">
+    <label class="col-span-2 text-gray-700">Profile Image</label>
+    <div class="flex items-center space-x-2 col-span-2">
+      <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+        <img id="previewImage" src="" alt="Preview" class="hidden w-full h-full object-cover">
+        <i class="fas fa-user text-gray-400 text-base" id="defaultIcon"></i>
+      </div>
+      <input type="file" name="image" id="profileImage" accept="image/*" class="hidden" onchange="previewFile()">
+      <button type="button" onclick="document.getElementById('profileImage').click()" class="bg-green-100 text-green-700 px-2 py-1 rounded hover:bg-green-200 text-xs">
+        Upload
+      </button>
     </div>
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+
+    <label for="type">Farmer Type</label>
+    <select id="type" name="type" class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+      <option>Urban Farmer</option>
+      <option>Organic Farmer</option>
+      <option>Dairy Farmer</option>
+      <option>Poultry Farmer</option>
+      <option>Crop Farmer</option>
+    </select>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" required class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+
+    <label for="experience">Experience (yrs)</label>
+    <input type="number" id="experience" name="experience" class="px-2 py-1 border rounded focus:ring-green-500 text-sm">
+
+    <label for="bio" class="col-span-2">Bio</label>
+    <textarea id="bio" name="bio" rows="2" class="w-full px-2 py-1 border rounded focus:ring-green-500 text-sm col-span-2"></textarea>
+  </div>
+
+  <div class="flex justify-end space-x-2 pt-2">
+    <button type="button" onclick="closePostModal()" class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-100">
+      Cancel
+    </button>
+    <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">
+      Post
+    </button>
+  </div>
 </form>
+  </div>
+</div>
 
         </div>
     </div>
@@ -189,44 +190,70 @@
                 <i class="fas fa-plus mr-2"></i> Post
             </button>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="farmersContainer">
-            <!-- Sample farmer cards (will be replaced by dynamic content) -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 card">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1556760544-74068565f05c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="John Doe" class="w-full h-48 object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                        <h3 class="text-xl font-bold text-white">John Doe</h3>
-                        <p class="text-green-300">Organic Farmer</p>
-                    </div>
-                </div>
-                
-                <div class="p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-600 text-sm"><i class="fas fa-map-marker-alt mr-2 text-green-600"></i> Nairobi, Kenya</span>
-                        <span class="text-gray-600 text-sm"><i class="fas fa-clock mr-2 text-green-600"></i> 5 years</span>
-                    </div>
-                    
-                    <p class="text-gray-700 text-sm mb-4">Specializing in organic vegetables and sustainable farming practices.</p>
-                    
-                    <div class="details">
-                        <div class="border-t pt-3 space-y-2 text-sm">
-                            <p><i class="fas fa-envelope mr-2 text-green-600"></i> <strong>Email:</strong> john@example.com</p>
-                            <p><i class="fas fa-phone mr-2 text-green-600"></i> <strong>Phone:</strong> +254 712 345 678</p>
+        <div class="hover">
+                    <% if (typeof farmers !== 'undefined' && farmers.length > 0) { %>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <% farmers.forEach(farmer => { %>
+                        <div class="bg-white shadow rounded p-4">
+                            <img src="<%= farmer.imageUrl %>" class="w-full h-48 object-cover rounded" alt="Farmer Photo">
+                            <h2 class="text-xl font-semibold mt-2"><%= farmer.name %></h2>
+                            <p>Farmer Type: <%= farmer.type %></p>
+                            <p>Email: <%= farmer.email %></p>
+                            <p>Phone: <%= farmer.phone %></p>
+                            <p>Location: <%= farmer.location %></p>
+                            <p>Experience: <%= farmer.experience %> years</p>
+                            <p><%= farmer.bio %></p>
                         </div>
+                        <% }) %>
                     </div>
-                    
-                    <div class="footer mt-4">
-                        <button class="learnMoreBtn w-full bg-green-100 text-green-700 py-2 rounded-lg hover:bg-green-200 transition text-sm">
-                            Contact Farmer
-                        </button>
-                    </div>
-                </div>
-            </div>
+                    <% } else { %>
+                    <p class="text-center text-gray-600">No farmer profiles available.</p>
+                    <% } %>
+        </div>
         </div>
     </div>
 
     <script>
+
+
+              function previewFile() {
+    const preview = document.getElementById('previewImage');
+    const file = document.getElementById('profileImage').files[0];
+    const icon = document.getElementById('defaultIcon');
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        preview.src = reader.result;
+        preview.classList.remove('hidden');
+        icon.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+          function previewFile() {
+    const input = document.getElementById('profileImage');
+    const preview = document.getElementById('previewImage');
+    const icon = document.getElementById('defaultIcon');
+
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+        icon.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function closePostModal() {
+    document.querySelector('.post-modal').classList.add('hidden');
+  }
+
+
         // DOM elements
         const farmersContainer = document.getElementById('farmersContainer');
         const farmerForm = document.getElementById('farmerForm');
@@ -284,6 +311,8 @@
                     </div>
                 </div>
             `;
+
+            
             
             farmersContainer.appendChild(card);
             
@@ -307,29 +336,48 @@
         }
         
         // Form submission
-        farmerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const newFarmer = {
-                name: document.getElementById('name').value,
-                type: document.getElementById('type').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                location: document.getElementById('location').value,
-                experience: document.getElementById('experience').value,
-                bio: document.getElementById('bio').value,
-                image: document.getElementById('previewImage').src || ''
-            };
-            
-            farmers.push(newFarmer);
-            localStorage.setItem('farmers', JSON.stringify(farmers));
-            createFarmerCard(newFarmer);
+     // Form submission
+farmerForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const imageInput = document.getElementById('profileImage');
+    const file = imageInput.files[0];
+    const formData = new FormData();
+
+    formData.append('name', document.getElementById('name').value);
+    formData.append('type', document.getElementById('type').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('location', document.getElementById('location').value);
+    formData.append('experience', document.getElementById('experience').value);
+    formData.append('bio', document.getElementById('bio').value);
+    if (file) {
+        formData.append('image', file);
+    }
+
+    try {
+        const response = await fetch('http://localhost:5000/api/farmers', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const savedFarmer = await response.json();
+            createFarmerCard(savedFarmer); // Render on page
             closePostModal();
             farmerForm.reset();
             document.getElementById('previewImage').src = '';
             document.getElementById('previewImage').classList.add('hidden');
             document.getElementById('defaultIcon').classList.remove('hidden');
-        });
+        } else {
+            alert('Failed to save farmer profile');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error saving profile');
+    }
+});
+
         
         // Preview uploaded image
         function previewFile() {
